@@ -1,6 +1,12 @@
 <?php
 
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\SubseenitController;
+use App\Models\Subseenit;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +20,28 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
+
+Route::get('s/{slug}', [SubseenitController::class, 'show'])->name('subseenits.show');
+Route::get('p/{postId}', [PostController::class, 'show'])->name('subseenits.posts.show');
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+    Route::get('/subseenits', function () {
+        return Inertia::render('Seenit/Subseenits', [
+            "subseenits" => Subseenit::all(['slug', 'name', 'description'])
+        ]);
+    })->name('subseenits');
+    Route::resource('subseenits', SubseenitController::class)->except('show');
+    Route::resource('subseenits.posts', PostController::class)->except('show');
+    Route::resource('posts.comments', CommentController::class);
+});
+
