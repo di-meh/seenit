@@ -22,9 +22,14 @@
                     </x-jet-nav-link>
                 </div>
             </div>
-
+            
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Teams Dropdown -->
+                <!-- Authentication Links -->
+                @guest
+
+                @endguest
+                @auth
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <div class="ml-3 relative">
                         <x-jet-dropdown align="right" width="60">
@@ -125,8 +130,9 @@
                         </x-slot>
                     </x-jet-dropdown>
                 </div>
+            @endauth
             </div>
-
+        
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition">
@@ -146,9 +152,19 @@
                 {{ __('Home') }}
             </x-jet-responsive-nav-link>
         </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('subseenits') }}" :active="request()->routeIs('subseenits')">
+                {{ __('Subseenits') }}
+            </x-jet-responsive-nav-link>
+        </div>
 
+        @guest
+
+        @endguest
+        @auth
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
+            
             <div class="flex items-center px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                     <div class="flex-shrink-0 mr-3">
@@ -217,5 +233,6 @@
                 @endif
             </div>
         </div>
+        @endauth
     </div>
 </nav>

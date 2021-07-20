@@ -23,12 +23,12 @@ Route::get('/', function () {
 
 Route::get('s/{slug}', [SubseenitController::class, 'show'])->name('subseenits.show');
 Route::get('p/{postId}', [PostController::class, 'show'])->name('subseenits.posts.show');
+Route::get('subseenits', [SubseenitController::class, 'index'])->name('subseenits');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/home', function () {
         return view('home');
     })->name('home');
-    Route::get('subseenits', [SubseenitController::class, 'index'])->name('subseenits');
     // Route::resource('subseenits', SubseenitController::class)->except('show');
     Route::resource('subseenits.posts', PostController::class)->except('show');
     Route::resource('posts.comments', CommentController::class);
