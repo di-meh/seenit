@@ -24,15 +24,12 @@ class SubseenitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        $subseenit = new Subseenit();
-        $subseenit->name = $request->name;
-        $subseenit->slug = $request->slug;
-        $subseenit->description = $request->description;
-        $subseenit->user_id = Auth::id();
-        $subseenit->save();
-        return redirect('subseenits');
+        
+        $subseenits = Subseenit::all();
+
+        return view('subseenitsCreate', compact('subseenits'));
     }
 
     /**
@@ -43,7 +40,13 @@ class SubseenitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $subseenit = new Subseenit();
+        $subseenit->name = $request->name;
+        $subseenit->slug = $request->slug;
+        $subseenit->description = $request->description;
+        $subseenit->user_id = Auth::id();
+        $subseenit->save();
+        return redirect('subseenits');
     }
 
     /**

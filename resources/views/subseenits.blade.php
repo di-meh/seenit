@@ -9,25 +9,19 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <p>Créer un Subseenit :</p>
                     {!! Form::open(['route'=> 'subseenits_create']) !!}
-                    Name : {!! Form::text('name') !!}
-                    <br/>
-                    Slug : {!! Form::text('slug') !!}
-                    <br/>
-                    {!! Form::textarea('description') !!}
-                    <br/>
-                    {!! Form::submit('Créer') !!}
+                    {!! Form::submit('Nouveau Subseenit') !!}
                     {!! Form::close() !!}
                     <br>
                     <ul>
                         @foreach ($subseenits as $subseenit)
-                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                            <div class="p-6 bg-white border-b border-gray-200">
-                                <a href="s/{{ $subseenit->slug }}">{{ $subseenit->name}}</a>
+                        <a href="s/{{ $subseenit->slug }}"><div class="bg-gray-200 overflow-hidden shadow-sm sm:rounded-lg">
+                            <div class="p-6 border-b border-gray-200">
+                                <h3>{{ $subseenit->name}}</h3>
                                 <li>description : {{$subseenit->description}}</li>
                             </div>
-                        </div>
+                        </div></a>
+                        <br/>
                         @endforeach
                     </ul>
                     <br>

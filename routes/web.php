@@ -32,6 +32,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     // Route::resource('subseenits', SubseenitController::class)->except('show');
     Route::resource('subseenits.posts', PostController::class)->except('show');
     Route::resource('posts.comments', CommentController::class);
+    Route::post('/subseenits/store', [SubseenitController::class, 'store'])
+        ->middleware(['auth'])->name('subseenits_store');
     Route::post('/subseenits/create', [SubseenitController::class, 'create'])
         ->middleware(['auth'])->name('subseenits_create');
 });
