@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\SubseenitController;
+use App\Models\Subseenit;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +18,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('s/{slug}', [SubseenitController::class, 'show'])->name('subseenits.show');
+Route::get('p/{postId}', [PostController::class, 'show'])->name('subseenits.posts.show');
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/home', function () {
+        return view('home');
+    })->name('home');
+    Route::get('subseenits', [SubseenitController::class, 'index'])->name('subseenits');
+    // Route::resource('subseenits', SubseenitController::class)->except('show');
+    Route::resource('subseenits.posts', PostController::class)->except('show');
+    Route::resource('posts.comments', CommentController::class);
+    Route::post('/subseenits/create', [SubseenitController::class, 'create'])
+        ->middleware(['auth'])->name('subseenits_create');
+});
