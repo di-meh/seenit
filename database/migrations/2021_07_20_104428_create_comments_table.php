@@ -17,6 +17,7 @@ class CreateCommentsTable extends Migration
             $table->id();
             $table->foreignId('post_id')->constrained();
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('comment_id')->nullable()->constrained();
             $table->text('comment_text');
             $table->integer('votes')->default(0);
             $table->timestamps();

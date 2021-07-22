@@ -21,8 +21,12 @@ class CommentFactory extends Factory
      */
     public function definition()
     {
+        $commentsIds = Comment::all()->pluck('id')->toArray();
         return [
-            //
+            'post_id' => rand(1,450),
+            'user_id' => rand(1,100),
+            'comment_text' => $this->faker->text,
+            'comment_id' => $this->faker->randomElement($commentsIds)
         ];
     }
 }

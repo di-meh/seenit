@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Subseenit;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class SubseenitFactory extends Factory
 {
@@ -21,8 +22,12 @@ class SubseenitFactory extends Factory
      */
     public function definition()
     {
+        $name = $this->faker->text(15);
         return [
-            //
+            'name' => $name,
+            'user_id' => rand(1,100),
+            'description' => $this->faker->text(),
+            'slug' => Str::slug($name)
         ];
     }
 }

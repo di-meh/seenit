@@ -21,8 +21,11 @@ class CommentVoteFactory extends Factory
      */
     public function definition()
     {
+        $votes = [-1, 1];
         return [
-            //
+            'comment_id' => rand(1, 200),
+            'user_id' => rand(1, 100),
+            'vote' => $votes[rand(0, 1)]
         ];
     }
 }
