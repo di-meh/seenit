@@ -1341,8 +1341,14 @@ select {
 .flex-wrap {
 	flex-wrap: wrap;
 }
+.items-start {
+	align-items: flex-start;
+}
 .items-center {
 	align-items: center;
+}
+.items-stretch {
+	align-items: stretch;
 }
 .justify-end {
 	justify-content: flex-end;
@@ -1893,6 +1899,17 @@ select {
 .hover\:text-gray-900:hover {
 	--tw-text-opacity: 1;
 	color: rgba(17, 24, 39, var(--tw-text-opacity));
+}
+.hover\:text-green-500:hover {
+	--tw-text-opacity: 1;
+	color: rgba(16, 185, 129, var(--tw-text-opacity));
+}
+.hover\:text-red-500:hover {
+	--tw-text-opacity: 1;
+	color: rgba(239, 68, 68, var(--tw-text-opacity));
+}
+.hover\:underline:hover {
+	text-decoration: underline;
 }
 .focus\:z-10:focus {
 	z-index: 10;

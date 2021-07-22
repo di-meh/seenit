@@ -19,7 +19,7 @@ use App\Models\Subseenit;
 
 Route::get('/', function () {
     return redirect('subseenits');
-});
+})->name('root');
 
 Route::get('s/{slug}', [SubseenitController::class, 'show'])->name('subseenits.show');
 Route::get('p/{postId}', [PostController::class, 'show'])->name('subseenits.posts.show');
@@ -27,7 +27,7 @@ Route::get('subseenits', [SubseenitController::class, 'index'])->name('subseenit
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/home', function () {
-        return view('home');
+        return redirect('subseenits');
     })->name('home');
     // Route::resource('subseenits', SubseenitController::class)->except('show');
     Route::resource('subseenits.posts', PostController::class)->except('show');

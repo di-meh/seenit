@@ -30,7 +30,8 @@ class CommentFactory extends Factory
             'post_id' => $this->faker->randomElement($postsId),
             'user_id' => $this->faker->randomElement($usersId),
             'comment_text' => $this->faker->text,
-            'comment_id' => $this->faker->randomElement($commentsIds)
+            'comment_id' => $this->faker->randomElement($commentsIds),
+            'votes' => rand(-5000, 5000)
         ];
     }
 }
