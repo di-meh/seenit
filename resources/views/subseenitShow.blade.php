@@ -4,16 +4,49 @@
             Subseenit : {{ $subseenit->name }}
         </h2>
     </x-slot>
-    
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <h2><strong>{{ $subseenit->name }}</strong> ({{ $subseenit->user_id }})</h2>
-                    <br>
-                    <p>Description : {{ $subseenit->description }}</p>
+
+    <div class="space-y-6 mt-6">
+        <div>
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 bg-white border-b border-gray-200">
+                        <h2 class="font-bold text-3xl">{{ $subseenit->name }}</h2>
+                        <h3>Créé par: {{ $subseenit->user->username }}</h3>
+                        <br>
+                        <p>Description : {{ $subseenit->description }}</p>
+                    </div>
                 </div>
             </div>
         </div>
+        @isset($posts)
+            <div class="">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <div class="p-6 bg-white border-b border-gray-200 space-y-6">
+                            @empty($posts)
+                                <p>Il n'y a aucun post.</p>
+                            @endempty
+                            @foreach($posts as $post)
+                                <div class="bg-gray-100 hover:bg-gray-200 transition-all overflow-hidden shadow-md sm:rounded-lg">
+                                    <a href="/p/{{$post->id}}">
+                                        <div class="p-6 border-b border-gray-200">
+                                            <h4 class="text-2xl font-bold">{{$post->title}}</h4>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endforeach
+                            {{$posts->links()}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endisset
     </div>
+
+
+
+
+
+
+
 </x-app-layout>

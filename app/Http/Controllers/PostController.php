@@ -44,9 +44,11 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show($postId)
     {
-        //
+        $post = Post::where('id', $postId)->firstOrFail();
+        $comments = $post->comments()->paginate(15);
+        return view('postShow', ['post' => $post, 'comments' =>$comments]);
     }
 
     /**

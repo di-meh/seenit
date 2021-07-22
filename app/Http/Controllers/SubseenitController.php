@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\Subseenit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,7 @@ class SubseenitController extends Controller
      */
     public function create()
     {
-        
+
         $subseenits = Subseenit::all();
 
         return view('subseenitsCreate', compact('subseenits'));
@@ -58,7 +59,8 @@ class SubseenitController extends Controller
     public function show($slug)
     {
         $subseenit = Subseenit::where('slug', $slug)->firstOrFail();
-        return view('subseenitShow', ['subseenit' => $subseenit]);
+        $posts = $subseenit->posts()->paginate(15);
+        return view('subseenitShow', ['subseenit' => $subseenit, 'posts' => $posts]);
     }
 
     /**

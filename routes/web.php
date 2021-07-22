@@ -18,7 +18,7 @@ use App\Models\Subseenit;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return redirect('subseenits');
 });
 
 Route::get('s/{slug}', [SubseenitController::class, 'show'])->name('subseenits.show');
@@ -32,8 +32,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     // Route::resource('subseenits', SubseenitController::class)->except('show');
     Route::resource('subseenits.posts', PostController::class)->except('show');
     Route::resource('posts.comments', CommentController::class);
-    Route::post('/subseenits/store', [SubseenitController::class, 'store'])
-        ->middleware(['auth'])->name('subseenits_store');
-    Route::post('/subseenits/create', [SubseenitController::class, 'create'])
-        ->middleware(['auth'])->name('subseenits_create');
+    Route::post('/subseenits/store', [SubseenitController::class, 'store'])->name('subseenits_store');
+    Route::post('/subseenits/create', [SubseenitController::class, 'create'])->name('subseenits_create');
 });

@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
+
+    public function votes() {
+        return $this->hasMany(CommentVote::class);
+    }
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+    public function comment() {
+        return $this->belongsTo(Comment::class);
+    }
 }
