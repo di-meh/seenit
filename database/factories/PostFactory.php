@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Post;
+use App\Models\Subseenit;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PostFactory extends Factory
@@ -21,9 +23,11 @@ class PostFactory extends Factory
      */
     public function definition()
     {
+        $subseenitsId = Subseenit::all()->pluck('id')->toArray();
+        $usersId = User::all()->pluck('id')->toArray();
         return [
-            'subseenit_id' => rand(1, 50),
-            'user_id' => rand(1, 100),
+            'subseenit_id' => $this->faker->randomElement($subseenitsId),
+            'user_id' => $this->faker->randomElement($usersId),
             'title' => $this->faker->text(50),
             'post_text' => $this->faker->text(500),
         ];
