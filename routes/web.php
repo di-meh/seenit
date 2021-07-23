@@ -25,6 +25,9 @@ Route::get('s/{slug}', [SubseenitController::class, 'show'])->name('subseenits.s
 Route::get('p/{postId}', [PostController::class, 'show'])->name('subseenits.posts.show');
 Route::get('subseenits', [SubseenitController::class, 'index'])->name('subseenits');
 
+Route::get('/votetest', function () {
+   return view('testvote');
+});
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/home', function () {
         return redirect('subseenits');
