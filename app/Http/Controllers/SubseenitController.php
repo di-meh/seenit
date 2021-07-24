@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Subseenit;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,9 +29,9 @@ class SubseenitController extends Controller
     public function create()
     {
 
-        $subseenits = Subseenit::all();
+//        $subseenits = Subseenit::all();
 
-        return view('subseenitsCreate', compact('subseenits'));
+        return view('subseenitsCreate');
     }
 
     /**
@@ -92,8 +93,14 @@ class SubseenitController extends Controller
      * @param  \App\Models\Subseenit  $subseenit
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subseenit $subseenit)
+    public function destroy($subseenitId)
     {
-        //
+        $sub = Subseenit::find($subseenitId);
+        $user = User::find(auth()->id());
+        if ($sub->user_id != $user->id && !$user->is_admin) {
+            return redirect('subseenits', 403);
+        }
+        $sub->delete();
+        return redirect('subseenits')->with('message', 'Subseenit supprimé !');
     }
 }

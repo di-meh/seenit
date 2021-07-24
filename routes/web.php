@@ -32,9 +32,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/home', function () {
         return redirect('subseenits');
     })->name('home');
-    // Route::resource('subseenits', SubseenitController::class)->except('show');
+//    Route::resource('subseenits', SubseenitController::class)->except('show');
     Route::resource('subseenits.posts', PostController::class)->except('show');
     Route::resource('posts.comments', CommentController::class);
     Route::post('/subseenits/store', [SubseenitController::class, 'store'])->name('subseenits_store');
-    Route::post('/subseenits/create', [SubseenitController::class, 'create'])->name('subseenits_create');
+    Route::get('/subseenits/create', [SubseenitController::class, 'create'])->name('subseenits_create');
+    Route::get('/subseenits/destroy/{subseenitId}', [SubseenitController::class, 'destroy'])->name('subseenits_destroy');
 });

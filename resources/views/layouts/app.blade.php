@@ -35,6 +35,16 @@
 
             <!-- Page Content -->
             <main>
+                @if(session('message'))
+                    <div class="bg-blue-300 rounded-lg p-6 w-full m-6 flex items-center justify-center">
+                        <p class="text-white"> {{session('message')}}</p>
+                    </div>
+                @endif
+                @if(session('error'))
+                    <div class="bg-red-300 w-full rounded-lg p-6 m-6 flex items-center justify-center">
+                        <p class="text-white"> {{session('error')}}</p>
+                    </div>
+                @endif
                 {{ $slot }}
             </main>
         </div>
