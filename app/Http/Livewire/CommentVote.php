@@ -13,7 +13,7 @@ class CommentVote extends Component
 
     public function mount($comment) {
         $this->comment = $comment;
-        $this->votes = Vote::where('comment_id', $comment->id)->get();
+        $this->votes = $comment->votes()->where('comment_id', $comment->id)->sum('vote');
     }
 
     public function vote($vote) {
