@@ -36,13 +36,17 @@
             <!-- Page Content -->
             <main>
                 @if(session('message'))
-                    <div class="bg-blue-300 rounded-lg p-6 w-full m-6 flex items-center justify-center">
-                        <p class="text-white"> {{session('message')}}</p>
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <div class="bg-blue-300 rounded-lg p-6 w-full mt-6 flex items-center justify-center">
+                            <p class="text-white"> {{session('message')}}</p>
+                        </div>
                     </div>
                 @endif
                 @if(session('error'))
-                    <div class="bg-red-300 w-full rounded-lg p-6 m-6 flex items-center justify-center">
-                        <p class="text-white"> {{session('error')}}</p>
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <div class="bg-red-300 w-full rounded-lg p-6 mt-6 flex items-center justify-center">
+                            <p class="text-white"> {{session('error')}}</p>
+                        </div>
                     </div>
                 @endif
                 {{ $slot }}

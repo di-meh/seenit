@@ -1103,9 +1103,6 @@ select {
 .m-4 {
 	margin: 1rem;
 }
-.m-6 {
-	margin: 1.5rem;
-}
 .mx-auto {
 	margin-left: auto;
 	margin-right: auto;
@@ -1184,6 +1181,9 @@ select {
 }
 .-mt-px {
 	margin-top: -1px;
+}
+.mb-2 {
+	margin-bottom: 0.5rem;
 }
 .block {
 	display: block;
@@ -1541,6 +1541,9 @@ select {
 }
 .bg-opacity-25 {
 	--tw-bg-opacity: 0.25;
+}
+.bg-cover {
+	background-size: cover;
 }
 .object-cover {
 	-o-object-fit: cover;

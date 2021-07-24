@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -22,9 +23,9 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Post $post)
     {
-        //
+        return view('comments.create', ['post' => $post]);
     }
 
     /**
@@ -33,9 +34,14 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Post $post)
     {
-        //
+        $comment = $post->comments()->create([
+            'post_id' => $post->id,
+            'user_id' => auth()->id(),
+            'comment_text' => $request->comment_text
+        ]);
+        return redirect()->route('subseenits.posts.show', $post->id);
     }
 
     /**
@@ -78,8 +84,12 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy(Post $post, Comment $comment)
     {
-        //
+        if ($comment->user_id != auth()->id() && $post->user_id != auth()->id() && !auth()->user()->is_admin) {
+            return redirect()->route('subseenits.posts.show', [$post->id], 403);
+        }
+        $comment->delete();
+        return redirect()->route('subseenits.posts.show', [$post->id])->with('message', 'Commentaire supprimé !');
     }
 }

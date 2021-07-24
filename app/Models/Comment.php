@@ -9,6 +9,8 @@ class Comment extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['post_id', 'user_id', 'comment_text'];
+
     public function votes() {
         return $this->hasMany(CommentVote::class);
     }
