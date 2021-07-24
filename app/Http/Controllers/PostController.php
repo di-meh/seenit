@@ -47,7 +47,7 @@ class PostController extends Controller
     public function show($postId)
     {
         $post = Post::where('id', $postId)->firstOrFail();
-        $comments = $post->comments()->paginate(15);
+        $comments = $post->comments()->with('votes')->paginate(15);
         return view('postShow', ['post' => $post, 'comments' =>$comments]);
     }
 

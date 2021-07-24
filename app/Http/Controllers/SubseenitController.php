@@ -59,8 +59,8 @@ class SubseenitController extends Controller
     public function show($slug)
     {
         $subseenit = Subseenit::where('slug', $slug)->firstOrFail();
-        $posts = $subseenit->posts()->paginate(15);
-        return view('subseenitShow', ['subseenit' => $subseenit, 'posts' => $posts]);
+        $posts = $subseenit->posts()->with('votes')->paginate(15);
+        return view('subseenitShow', compact('subseenit', 'posts'));
     }
 
     /**

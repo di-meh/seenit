@@ -30,7 +30,6 @@ class PostFactory extends Factory
             'user_id' => $this->faker->randomElement($usersId),
             'title' => $this->faker->text(50),
             'post_text' => $this->faker->text(500),
-            'votes' => rand(-5000, 5000)
         ];
     }
 }
