@@ -61,9 +61,9 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comment $comment)
+    public function edit(Post $post, Comment $comment)
     {
-        //
+        return auth()->id() == $comment->user->id ? view('comments.edit', compact('post', 'comment')) : redirect()->route('subseenits.posts.show', 403);
     }
 
     /**
@@ -73,9 +73,12 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, Post $post, Comment $comment)
     {
-        //
+        $comment->update([
+            "comment_text" => $request->comment_text
+        ]);
+        return redirect()->route('subseenits.posts.show', $post->id)->with('message', 'Commentaire mis à jour');
     }
 
     /**

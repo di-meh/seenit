@@ -25,19 +25,15 @@ Route::get('s/{slug}', [SubseenitController::class, 'show'])->name('subseenits.s
 Route::get('p/{postId}', [PostController::class, 'show'])->name('subseenits.posts.show');
 Route::get('subseenits', [SubseenitController::class, 'index'])->name('subseenits');
 
-Route::get('/votetest', function () {
-   return view('testvote');
-});
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/home', function () {
         return redirect('subseenits');
     })->name('home');
-//    Route::resource('subseenits', SubseenitController::class)->except('show');
+    Route::resource('subseenits', SubseenitController::class)->except(['index','show', 'store','create','destroy']);
     Route::resource('subseenits.posts', PostController::class)->except('show');
     Route::resource('posts.comments', CommentController::class);
-    Route::post('/subseenits/store', [SubseenitController::class, 'store'])->name('subseenits_store');
-    Route::get('/subseenits/create', [SubseenitController::class, 'create'])->name('subseenits_create');
-    Route::get('/subseenits/destroy/{subseenitId}', [SubseenitController::class, 'destroy'])->name('subseenits_destroy');
+    Route::post('/subseenits/store', [SubseenitController::class, 'store'])->name('subseenits.store');
+    Route::get('/subseenits/create', [SubseenitController::class, 'create'])->name('subseenits.create');
+    Route::get('/subseenits/destroy/{subseenitId}', [SubseenitController::class, 'destroy'])->name('subseenits.destroy');
     Route::post('posts/{post_id}/report', [PostController::class, 'report'])->name('post.report');
-
 });

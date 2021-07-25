@@ -79,9 +79,9 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Subseenit $subseenit, Post $post)
     {
-        //
+        return auth()->id() == $post->user->id ? view('posts.edit', compact('subseenit', 'post')) : redirect()->route('subseenits.show', 403);
     }
 
     /**
@@ -91,9 +91,14 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Subseenit $subseenit, Post $post)
     {
-        //
+        $post->update([
+            'title' => $request->title,
+            'post_text' => $request->post_text,
+            'post_url' => $request->post_url ?? $post->post_url
+        ]);
+        return redirect()->route('subseenits.show', $subseenit->slug)->with('message', 'Post mis à jour');
     }
 
     /**

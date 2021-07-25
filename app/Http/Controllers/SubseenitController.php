@@ -18,7 +18,7 @@ class SubseenitController extends Controller
     public function index()
     {
         $subseenits = Subseenit::paginate(50);
-        return view('subseenits', ['subseenits' => $subseenits]);
+        return view('subseenits.index', ['subseenits' => $subseenits]);
     }
 
     /**
@@ -72,7 +72,7 @@ class SubseenitController extends Controller
      */
     public function edit(Subseenit $subseenit)
     {
-        //
+        return auth()->id() == $subseenit->user->id ?  view('subseenits.edit', compact('subseenit')) : redirect()->route('subseenits', 403);
     }
 
     /**
@@ -84,7 +84,11 @@ class SubseenitController extends Controller
      */
     public function update(Request $request, Subseenit $subseenit)
     {
-        //
+        $subseenit->update([
+            'name' => $request->name,
+            'description' => $request->description
+        ]);
+        return redirect()->route('subseenits')->with('message', 'Subseenit mis à jour');
     }
 
     /**
