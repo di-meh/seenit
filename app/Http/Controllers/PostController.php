@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Subseenit;
+use App\Notifications\PostReportNotification;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
@@ -69,7 +70,7 @@ class PostController extends Controller
     {
         $post = Post::where('id', $postId)->firstOrFail();
         $comments = $post->comments()->with('votes')->paginate(15);
-        return view('postShow', ['post' => $post, 'comments' =>$comments]);
+        return view('posts.show', ['post' => $post, 'comments' =>$comments]);
     }
 
     /**
@@ -108,5 +109,10 @@ class PostController extends Controller
         }
         $post->delete();
         return redirect()->route('subseenits.show', [$subseenit->slug])->with('message', 'Post supprimé !');
+    }
+    public function report($postId) {
+        $post = Post::with('subseenit.user')->findOrFail($postId);
+        $post->subseenit->user->notify(new PostReportNotification($post));
+        return redirect()->route('subseenits.posts.show', $postId)->with('message', 'Post signalé!');
     }
 }

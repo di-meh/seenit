@@ -38,4 +38,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::post('/subseenits/store', [SubseenitController::class, 'store'])->name('subseenits_store');
     Route::get('/subseenits/create', [SubseenitController::class, 'create'])->name('subseenits_create');
     Route::get('/subseenits/destroy/{subseenitId}', [SubseenitController::class, 'destroy'])->name('subseenits_destroy');
+    Route::post('posts/{post_id}/report', [PostController::class, 'report'])->name('post.report');
+
 });

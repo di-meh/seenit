@@ -31,7 +31,7 @@ class SubseenitController extends Controller
 
 //        $subseenits = Subseenit::all();
 
-        return view('subseenitsCreate');
+        return view('subseenits.create');
     }
 
     /**
@@ -61,7 +61,7 @@ class SubseenitController extends Controller
     {
         $subseenit = Subseenit::where('slug', $slug)->firstOrFail();
         $posts = $subseenit->posts()->with('votes')->paginate(15);
-        return view('subseenitShow', compact('subseenit', 'posts'));
+        return view('subseenits.show', compact('subseenit', 'posts'));
     }
 
     /**
