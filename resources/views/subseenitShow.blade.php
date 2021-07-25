@@ -43,7 +43,14 @@
                                                 <livewire:post-vote :post="$post" />
                                                 <a href="/p/{{$post->id}}">
                                                     <div class="flex flex-col items-start justify-center">
-                                                        <h2 class="font-bold">{{$post->user->username}}</h2>
+                                                        <div class="flex items-center space-x-2">
+                                                            @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                                                                <img class="h-8 w-8 rounded-full object-cover" src="{{ $post->user->profile_photo_url }}" alt="{{ $post->user->username }}" />
+                                                            @endif
+                                                                <h2 class="font-bold">{{$post->user->username}}</h2>
+
+                                                        </div>
+
                                                         <h4 class="text-2xl font-bold w-full  hover:underline">{{$post->title}}</h4>
                                                         @if ($post->post_image)
                                                             <img src="{{ asset('storage/posts/' . $post->id . '/thumbnail_' . $post->post_image) }}" class="w-full rounded-lg shadow-lg border-2"/>

@@ -9,7 +9,13 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200 space-y-1">
-                        <h1 class="font-bold">{{$post->user->username}}</h1>
+                        <div class="flex items-center space-x-2">
+                            @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                                <img class="h-8 w-8 rounded-full object-cover" src="{{ $post->user->profile_photo_url }}" alt="{{ $post->user->username }}" />
+                            @endif
+                            <h1 class="font-bold">{{$post->user->username}}</h1>
+                        </div>
+
                         <h2 class="font-bold text-2xl">{{ $post->title }}</h2>
                         <p>{{ $post->post_text }}</p>
                         @if ($post->post_url != '')
@@ -46,7 +52,12 @@
                                             <div class="flex items-center space-x-8">
                                                 <livewire:comment-vote :comment="$comment" />
                                                 <div class="flex flex-col items-start justify-center">
-                                                    <p class="font-bold">{{$comment->user->username}}</p>
+                                                    <div class="flex items-center space-x-2">
+                                                        @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                                                            <img class="h-8 w-8 rounded-full object-cover" src="{{ $comment->user->profile_photo_url }}" alt="{{ $post->user->username }}" />
+                                                        @endif
+                                                        <h1 class="font-bold">{{$comment->user->username}}</h1>
+                                                    </div>
                                                     <p class="text-lg">{{$comment->comment_text}}</p>
                                                 </div>
                                             </div>
