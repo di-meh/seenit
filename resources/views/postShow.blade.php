@@ -13,13 +13,10 @@
                         <h2 class="font-bold text-2xl">{{ $post->title }}</h2>
                         <p>{{ $post->post_text }}</p>
                         @if ($post->post_url != '')
-                            <div class="mb-2">
-                                <a href="{{ $post->post_url }}" target="_blank">{{ $post->post_url }}</a>
-                            </div>
+                            <a href="{{ $post->post_url }}" class="text-blue-400 underline" target="_blank">{{ $post->post_url }}</a>
                         @endif
-                        @if ($post->post_image != '')
-                            <img src="{{ asset('storage/posts/' . $post->id . '/thumbnail_' . $post->post_image) }}"/>
-                            <br/><br/>
+                        @if ($post->post_image)
+                            <img src="{{ asset('storage/posts/' . $post->id . '/thumbnail_' . $post->post_image) }}" class="w-full rounded-lg shadow-lg border-2"/>
                         @endif
 {{--                        <img src="https://images.unsplash.com/photo-1625527575307-616f0bb84ad2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3155&q=80" class="w-full rounded-lg shadow-lg">--}}
                     </div>

@@ -45,6 +45,9 @@
                                                     <div class="flex flex-col items-start justify-center">
                                                         <h2 class="font-bold">{{$post->user->username}}</h2>
                                                         <h4 class="text-2xl font-bold w-full  hover:underline">{{$post->title}}</h4>
+                                                        @if ($post->post_image)
+                                                            <img src="{{ asset('storage/posts/' . $post->id . '/thumbnail_' . $post->post_image) }}" class="w-full rounded-lg shadow-lg border-2"/>
+                                                        @endif
 {{--                                                        <img src="https://images.unsplash.com/photo-1625527575307-616f0bb84ad2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3155&q=80" class="max-w-44 overflow-hidden  bg-cover rounded-lg shadow-lg">--}}
 
                                                     </div>

@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
 
-                    <form method="POST" action="{{ route('subseenits.posts.store', $subseenit) }}" class="space-y-6">
+                    <form method="POST" action="{{ route('subseenits.posts.store', $subseenit) }}" class="space-y-6" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -65,8 +65,8 @@
 
                                 @error('post_image')
                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>

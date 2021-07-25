@@ -1182,9 +1182,6 @@ select {
 .-mt-px {
 	margin-top: -1px;
 }
-.mb-2 {
-	margin-bottom: 0.5rem;
-}
 .block {
 	display: block;
 }
@@ -1785,6 +1782,10 @@ select {
 .text-gray-300 {
 	--tw-text-opacity: 1;
 	color: rgba(209, 213, 219, var(--tw-text-opacity));
+}
+.text-blue-400 {
+	--tw-text-opacity: 1;
+	color: rgba(96, 165, 250, var(--tw-text-opacity));
 }
 .underline {
 	text-decoration: underline;

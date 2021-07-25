@@ -44,13 +44,11 @@ class PostController extends Controller
             'post_text' => $request->post_text ?? null,
             'post_url' => $request->post_url ?? null,
         ]);
-
         if ($request->hasFile('post_image')) {
             $image = $request->file('post_image')->getClientOriginalName();
             $request->file('post_image')
                 ->storeAs('posts/' . $post->id, $image);
             $post->update(['post_image' => $image]);
-
             $file = Image::make(storage_path('app/public/posts/' . $post->id . '/' . $image));
             $file->resize(600, null, function ($constraint) {
                 $constraint->aspectRatio();

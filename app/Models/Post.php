@@ -18,7 +18,6 @@ class Post extends Model
     public function votes() {
         return $this->hasMany(PostVote::class);
     }
-
     public function subseenit() {
         return $this->belongsTo(Subseenit::class);
     }

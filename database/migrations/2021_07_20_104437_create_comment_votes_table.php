@@ -15,7 +15,7 @@ class CreateCommentVotesTable extends Migration
     {
         Schema::create('comment_votes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('comment_id')->constrained();
+            $table->foreignId('comment_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained();
             $table->smallInteger('vote');
             $table->timestamps();
