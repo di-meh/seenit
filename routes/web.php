@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
@@ -24,6 +25,7 @@ Route::get('/', function () {
 Route::get('s/{slug}', [SubseenitController::class, 'show'])->name('subseenits.show');
 Route::get('p/{postId}', [PostController::class, 'show'])->name('subseenits.posts.show');
 Route::get('subseenits', [SubseenitController::class, 'index'])->name('subseenits');
+Route::get('u/{username}', [UserController::class, 'index'])->name('user.show');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/home', function () {

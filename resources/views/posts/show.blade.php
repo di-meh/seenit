@@ -52,12 +52,14 @@
                                         <div class="flex items-center space-x-8">
                                             <livewire:comment-vote :comment="$comment" />
                                             <div class="flex flex-col items-start justify-center">
-                                                <div class="flex items-center space-x-2">
-                                                    @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                                                        <img class="h-8 w-8 rounded-full object-cover" src="{{ $comment->user->profile_photo_url }}" alt="{{ $post->user->username }}" />
-                                                    @endif
-                                                    <h1 class="font-bold">{{$comment->user->username}}</h1>
-                                                </div>
+                                                <a href="{{route('user.show', [$comment->user->username])}}">
+                                                    <div class="flex items-center space-x-2">
+                                                        @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                                                            <img class="h-8 w-8 rounded-full object-cover" src="{{ $comment->user->profile_photo_url }}" alt="{{ $comment->user->username }}" />
+                                                        @endif
+                                                        <h2 class="font-bold">{{$comment->user->username}}</h2>
+                                                    </div>
+                                                </a>
                                                 <p class="text-lg">{{$comment->comment_text}}</p>
                                             </div>
                                         </div>

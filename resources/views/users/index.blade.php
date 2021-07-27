@@ -1,33 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
+        @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+            <img class="h-8 w-8 rounded-full object-cover" src="{{ $user->profile_photo_url }}" alt="{{ $user->username }}" />
+        @endif
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Subseenit : {{ $subseenit->name }}
+            {{ $user->username }}
         </h2>
-        <h3 class="font-bold">/s/{{ $subseenit->slug }}</h3>
     </x-slot>
 
     <div class="space-y-6 mt-6">
-        <div>
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 bg-white border-b border-gray-200">
-                        <h2 class="font-bold text-3xl">{{ $subseenit->name }}</h2>
-                        <h3>Créé par: {{ $subseenit->user->username }}</h3>
-                        <br>
-                        <p>Description : {{ $subseenit->description }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @if(Auth::check())
-            <div>
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <a href="{{route('subseenits.posts.create', $subseenit->id)}}">
-                        <div class="rounded-lg bg-blue-500 shadow-md w-auto flex items-center justify-center p-6 mb-6 "><p class="text-white">Nouveau Post</p></div>
-                    </a>
-                </div>
-            </div>
-        @endif
         @isset($posts)
             <div>
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -41,24 +22,24 @@
                                     <div class="p-6 border-b border-gray-200 flex flex-row items-center justify-between space-x-8">
                                         <div class="flex items-center space-x-8">
                                             <livewire:post-vote :post="$post" />
-
+                                            <a href="/p/{{$post->id}}">
                                                 <div class="flex flex-col items-start justify-center">
-                                                    <a href="{{route('user.show', [$post->user->username])}}">
-                                                        <div class="flex items-center space-x-2">
-                                                                @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                                                                    <img class="h-8 w-8 rounded-full object-cover" src="{{ $post->user->profile_photo_url }}" alt="{{ $post->user->username }}" />
-                                                                @endif
-                                                                <h2 class="font-bold">{{$post->user->username}}</h2>
-                                                        </div>
-                                                    </a>
-                                                    <a href="/p/{{$post->id}}">
-                                                        <h4 class="text-2xl font-bold w-full  hover:underline">{{$post->title}}</h4>
-                                                        @if ($post->post_image)
-                                                            <img src="{{ asset('storage/posts/' . $post->id . '/thumbnail_' . $post->post_image) }}" class="w-full rounded-lg shadow-lg border-2"/>
+                                                    <div class="flex items-center space-x-2">
+                                                        @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                                                            <img class="h-8 w-8 rounded-full object-cover" src="{{ $post->user->profile_photo_url }}" alt="{{ $post->user->username }}" />
                                                         @endif
-                                                    </a>
+                                                        <h2 class="font-bold">{{$post->user->username}}</h2>
+
+                                                    </div>
+
+                                                    <h4 class="text-2xl font-bold w-full  hover:underline">{{$post->title}}</h4>
+                                                    @if ($post->post_image)
+                                                        <img src="{{ asset('storage/posts/' . $post->id . '/thumbnail_' . $post->post_image) }}" class="w-full rounded-lg shadow-lg border-2"/>
+                                                    @endif
                                                     {{--                                                        <img src="https://images.unsplash.com/photo-1625527575307-616f0bb84ad2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3155&q=80" class="max-w-44 overflow-hidden  bg-cover rounded-lg shadow-lg">--}}
+
                                                 </div>
+                                            </a>
                                         </div>
                                         @if(Auth::check())
                                             <div class="flex items-center space-x-2">
@@ -93,11 +74,4 @@
             </div>
         @endisset
     </div>
-
-
-
-
-
-
-
 </x-app-layout>
